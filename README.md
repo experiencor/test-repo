@@ -10,7 +10,7 @@ The two original papers are https://arxiv.org/abs/1506.02640 (YOLOv1) and https:
 Dataset from shttps://github.com/datitran/raccoon_dataset.
 
 ## Self-driving Car
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://j.gifs.com/ZVOBXR.gif)</p></a>
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://j.gifs.com/oY3zDB.gif)</p></a>
 
 Trained on VOC2007 and did detection on a random dashcam video.
 
