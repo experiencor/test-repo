@@ -7,7 +7,7 @@ The two original papers are https://arxiv.org/abs/1506.02640 (YOLOv1) and https:
 ## Raccon detection
 <a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center">![Foo](https://j.gifs.com/E9O21Y.gif)</p></a>
 
-Dataset from shttps://github.com/datitran/raccoon_dataset.
+Dataset from https://github.com/datitran/raccoon_dataset.
 
 ## Self-driving Car
 <a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://j.gifs.com/oY3zDB.gif)</p></a>
