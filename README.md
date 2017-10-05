@@ -12,7 +12,7 @@ Evaluation of the current implementation:
 <a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center">![Foo](https://j.gifs.com/oY3zDB.gif)</p></a>
 
 ## Self-driving Car
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://j.gifs.com/oY3zDB.gif)</p></a>
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://j.gifs.com/E9O21Y.gif)</p></a>
 
 # Usage for bare python people
 ## Data preparation
