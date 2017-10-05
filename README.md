@@ -7,7 +7,7 @@ The two original papers are https://arxiv.org/abs/1506.02640 (YOLOv1) and https:
 ## Raccon detection
 <a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center">![Foo](https://j.gifs.com/E9O21Y.gif)</p></a>
 
-Dataset from https://github.com/datitran/raccoon_dataset.
+Dataset from shttps://github.com/datitran/raccoon_dataset.
 
 ## Self-driving Car
 <a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://j.gifs.com/oY3zDB.gif)</p></a>
@@ -16,18 +16,9 @@ Trained on VOC2007 and did detection on a random dashcam video.
 
 # Usage for python code
 ## Data preparation
-Download COCO detection data from http://cocodataset.org/#download
+Download the Raccoon dataset from from shttps://github.com/datitran/raccoon_dataset.
 
-+ http://images.cocodataset.org/zips/train2014.zip => training images
-
-+ http://images.cocodataset.org/zips/val2014.zip => validation images
-
-+ http://images.cocodataset.org/annotations/annotations_trainval2014.zip => training and validation annotations
-    
-Run this script to convert COCO annotation format to VOC format
-    https://gist.github.com/chicham/6ed3842d0d2014987186#file-coco2pascal-py
-
-At the end of this process, we should have handles to the 4 folders:
+Organize the dataset into 4 folders:
 
 + train_image_folder <= the folder that contains the train images.
 
@@ -37,7 +28,7 @@ At the end of this process, we should have handles to the 4 folders:
 
 + valid_annot_folder <= the folder that contains the validation annotations in VOC format.
     
-There is a one-to-one correspondence by file name between images and annotations. For custom dataset, it should be organized in this manner too. Otherwise, the training set will be automatically splitted into training set and validation set using the ratio of 0.8.
+There is a one-to-one correspondence by file name between images and annotations. If the validation set is empty, the training set will be automatically splitted into the training set and validation set using the ratio of 0.8.
 
 ## Edit the configuration file
 The configuration file is a json file, which looks like this:
@@ -45,7 +36,7 @@ The configuration file is a json file, which looks like this:
 ```json
 {
     "model" : {
-        "architecture":         "Tiny Yolo",
+        "architecture":         "Full Yolo",
         "input_size":           416,
         "anchors":              [0.57273, 0.677385, 1.87446, 2.06253, 3.33843, 5.47434, 7.88282, 3.52778, 9.77052, 9.16828],
         "max_box_per_image":    10,        
@@ -88,7 +79,7 @@ Download pretrained weights of full yolo: https://1drv.ms/u/s!ApLdDEW3ut5fbAMIhQ
 
 `python train.py -c config.json`
 
-By the end of this process, the code will produce the best model. Training stops when the loss on the validation stops being improved in 3 consecutive epoches.
+By the end of this process, the code will write the weights of the best model to file best_weights.h5. The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
 
 ## Perform detection using trained weights on an image by running
 `python predict.py -c config.json -w /path/to/best_weights.h5 -i /path/to/image`
