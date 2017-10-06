@@ -20,7 +20,7 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 Dataset from shttps://github.com/datitran/raccoon_dataset.
 
 ### Self-driving Car
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://i.imgur.com/kEc9ptL.jpg)</p></a>
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/kEc9ptL.jpg" height="300"></p></a>
 
 Trained on COCO dataset and did detection on a random dashcam video.
 
