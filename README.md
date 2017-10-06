@@ -1,20 +1,7 @@
 
 # YOLOv2 in Keras and Applications
 
-This is an implementation of YOLOv2 in Keras with Tensorflow backend and some of its interesting applications. 
-
-
-## Some example applications:
-
-### Raccon detection
-<a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center" width="400">![Foo](https://image.ibb.co/bXZt3w/image.jpg)</p></a>
-
-Dataset from shttps://github.com/datitran/raccoon_dataset.
-
-### Self-driving Car
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://preview.ibb.co/n6fSVb/Screenshot_2017_10_06_22_08_17.png)</p></a>
-
-Trained on COCO dataset and did detection on a random dashcam video.
+This project aims to implement all the details of YOLOv2 in Keras with Tensorflow backend. It only explores to apply YOLOv2 to some interesting applications. 
 
 ## Todo list:
 - [x] Warmup training
@@ -24,6 +11,18 @@ Trained on COCO dataset and did detection on a random dashcam video.
 - [ ] SqueezeNet backend
 - [ ] MobileNet backend
 - [ ] Multiscale training
+
+## Some example applications:
+
+### Raccon detection
+<a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center" width="400">![Foo](https://i.imgur.com/6okeDjz.jpg)</p></a>
+
+Dataset from shttps://github.com/datitran/raccoon_dataset.
+
+### Self-driving Car
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center">![Foo](https://i.imgur.com/kEc9ptL.jpg)</p></a>
+
+Trained on COCO dataset and did detection on a random dashcam video.
 
 ## Usage for python code
 ### Data preparation
