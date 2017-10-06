@@ -1,7 +1,7 @@
 
 # YOLOv2 in Keras and Applications
 
-This project aims to implement all the details of YOLOv2 in Keras with Tensorflow backend. It only explores to apply YOLOv2 to some interesting applications. 
+This project aims to implement all the details of YOLOv2 in Keras with Tensorflow backend. It also explores to apply YOLOv2 to some interesting applications. 
 
 ## Todo list:
 - [x] Warmup training
@@ -26,7 +26,7 @@ Trained on COCO dataset and did detection on a random dashcam video.
 
 ## Usage for python code
 ### Data preparation
-Download the Raccoon dataset from from shttps://github.com/datitran/raccoon_dataset.
+Download the Raccoon dataset from from https://github.com/datitran/raccoon_dataset.
 
 Organize the dataset into 4 folders:
 
