@@ -15,9 +15,7 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 ## Some example applications:
 
 ### Raccon detection
-
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
-<a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center" width="400">![Foo](https://i.imgur.com/6okeDjz.jpg)</p></a>
+<img src="https://github.com/favicon.ico" height="24">
 
 Dataset from shttps://github.com/datitran/raccoon_dataset.
 
