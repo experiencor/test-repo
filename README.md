@@ -75,6 +75,8 @@ Download pretrained weights of tiny yolo: https://1drv.ms/u/s!ApLdDEW3ut5fa5Z9ji
 
 Download pretrained weights of full yolo: https://1drv.ms/u/s!ApLdDEW3ut5fbAMIhQAO1A26n2A
 
+Important! Plese remember to change "labels" to the list of labels that you want to detect.
+
 ## Start the training process
 
 `python train.py -c config.json`
@@ -86,9 +88,9 @@ By the end of this process, the code will write the weights of the best model to
 
 It carries out detection on a image and write the image with detected bounding boxes to the same folder.
 
-# Usage jupyter notebook
+# Usage for jupyter notebook
 
-Refer to the notebook (https://github.com/experiencor/basic-yolo-keras/blob/master/Yolo%20Step-by-Step.ipynb) for a complete step-through implementation of YOLOv2 from scratch (training, testing, and scoring).
+Refer to the notebook (https://github.com/experiencor/basic-yolo-keras/blob/master/Yolo%20Step-by-Step.ipynb) for a complete walk-through implementation of YOLOv2 from scratch (training, testing, and scoring).
 
 # Evaluation of the current implementation:
 
