@@ -57,7 +57,7 @@ The configuration file is a json file, which looks like this:
         "train_image_folder":   "/home/andy/data/raccoon_dataset/images/",
         "train_annot_folder":   "/home/andy/data/raccoon_dataset/anns/",      
           
-        "train_times":          10,             # the number of time to cycle through the training set, useful for small datasets
+        "train_times":          10,             // the number of time to cycle through the training set, useful for small datasets
         "pretrained_weights":   "",             # specify the path of the pretrained weights, it's fine to start from scratch
         "batch_size":           16,             # the number of images to read in each batch
         "learning_rate":        1e-4,           # the base learning rate of the default Adam rate scheduler
