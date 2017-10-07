@@ -43,7 +43,7 @@ There is a one-to-one correspondence by file name between images and annotations
 ### Edit the configuration file
 The configuration file is a json file, which looks like this:
 
-```json
+```python
 {
     "model" : {
         "architecture":         "Full Yolo",    # should be either "Tiny Yolo" or "Full Yolo"
