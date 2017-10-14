@@ -13,12 +13,12 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 - [x] InceptionV3 backend
 - [ ] Multiscale training
 
-## Some example applications:
+## Some example applications (click for videos):
 
 ### Raccon detection
 <a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center"><img src="https://i.imgur.com/6okeDjz.jpg" height="300"></p></a>
 
-Dataset from shttps://github.com/datitran/raccoon_dataset.
+Dataset => https://github.com/datitran/raccoon_dataset.
 
 ### Kangaroo detection
 <a href="https://youtu.be/vjmFzEP1qZw?t=34" rel="some text"><p align="center"><img src="https://i.imgur.com/v606VZX.jpg" height="300"></p></a>
@@ -29,6 +29,16 @@ Dataset to be released.
 <a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/kEc9ptL.jpg" height="300"></p></a>
 
 Trained on COCO dataset and did detection on a random dashcam video.
+
+### Red blod cell detection
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/7zwuGiJ.jpg" height="300"></p></a>
+
+Dataset => https://github.com/cosmicad/dataset.
+
+### Hand detection
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/7zwuGiJ.jpg" height="300"></p></a>
+
+Dataset => confidential.
 
 ## Usage for python code
 ### 1. Data preparation
@@ -46,7 +56,7 @@ Organize the dataset into 4 folders:
     
 There is a one-to-one correspondence by file name between images and annotations. If the validation set is empty, the training set will be automatically splitted into the training set and validation set using the ratio of 0.8.
 
-### Edit the configuration file
+### 2. Edit the configuration file
 The configuration file is a json file, which looks like this:
 
 ```python
@@ -96,13 +106,13 @@ Download pretrained weights of full yolo: https://1drv.ms/u/s!ApLdDEW3ut5fbAMIhQ
 
 These weights must be put in the root folder of the repository. They are the pre-trained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained.
 
-### Start the training process
+### 3. Start the training process
 
 `python train.py -c config.json`
 
 By the end of this process, the code will write the weights of the best model to file best_weights.h5. The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
 
-### Perform detection using trained weights on an image by running
+### 4. Perform detection using trained weights on an image by running
 `python predict.py -c config.json -w /path/to/best_weights.h5 -i /path/to/image`
 
 It carries out detection on the image and write the image with detected bounding boxes to the same folder.
