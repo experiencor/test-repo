@@ -8,8 +8,9 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 - [x] Raccoon detection
 - [x] Self-driving car
 - [x] Kangaroo detection
-- [ ] SqueezeNet backend
-- [ ] MobileNet backend
+- [x] SqueezeNet backend
+- [x] MobileNet backend
+- [x] InceptionV3 backend
 - [ ] Multiscale training
 
 ## Some example applications:
@@ -19,7 +20,7 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 
 Dataset from shttps://github.com/datitran/raccoon_dataset.
 
-### Raccon detection
+### Kangaroo detection
 <a href="https://youtu.be/vjmFzEP1qZw?t=34" rel="some text"><p align="center"><img src="https://i.imgur.com/v606VZX.jpg" height="300"></p></a>
 
 Dataset to be released.
@@ -30,7 +31,7 @@ Dataset to be released.
 Trained on COCO dataset and did detection on a random dashcam video.
 
 ## Usage for python code
-### Data preparation
+### 1. Data preparation
 Download the Raccoon dataset from from https://github.com/datitran/raccoon_dataset.
 
 Organize the dataset into 4 folders:
@@ -93,7 +94,7 @@ Download pretrained weights of tiny yolo: https://1drv.ms/u/s!ApLdDEW3ut5fa5Z9ji
 
 Download pretrained weights of full yolo: https://1drv.ms/u/s!ApLdDEW3ut5fbAMIhQAO1A26n2A
 
-Important! Plese remember to change "labels" to the list of labels that you want to detect.
+These weights must be put in the root folder of the repository. They are the pre-trained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained.
 
 ### Start the training process
 
