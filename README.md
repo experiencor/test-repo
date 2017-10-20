@@ -35,6 +35,11 @@ Dataset => http://cocodataset.org/#detections-challenge2017
 
 Dataset => https://github.com/cosmicad/dataset
 
+### Red blod cell detection
+<a href="https://www.youtube.com/watch?v=p3-3kN_fIz0" rel="some text"><p align="center"><img src="https://i.imgur.com/75imQQz.jpg" height="300"></p></a>
+
+Dataset => https://github.com/cosmicad/dataset
+
 ## Usage for python code
 ### 1. Data preparation
 Download the Raccoon dataset from from https://github.com/datitran/raccoon_dataset.
@@ -99,13 +104,13 @@ Download pretrained features of tiny yolo, full yolo, squeezenet, mobilenet, and
 
 https://1drv.ms/f/s!ApLdDEW3ut5fec2OzK4S4RpT-SU
 
-These weights must be put in the root folder of the repository. They are the pre-trained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained. Attempt to load these weights to the the full model will result in Keras complaining about about size difference.
+These weights must be put in the root folder of the repository. They are the pretrained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained.
 
-The link to the pre-trained weights for the whole model of the raccoon detector can be downloaded at:
+The link to the pretrained weights for the whole model of the raccoon detector can be downloaded at:
 
 https://1drv.ms/f/s!ApLdDEW3ut5feoZAEUwmSMYdPlY
 
-These weights can be used as the pre-trained weights for any one class object detectors.
+These weights can be used as the pretrained weights for any one class object detectors.
 
 ### 3. Start the training process
 
