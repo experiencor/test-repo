@@ -31,7 +31,7 @@ Dataset => https://github.com/experiencor/kangaroo
 Dataset => http://cocodataset.org/#detections-challenge2017
 
 ### Red blod cell detection
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/7zwuGiJ.jpg" height="300"></p></a>
+<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/1vmIJKL.jpg" height="300"></p></a>
 
 Dataset => https://github.com/cosmicad/dataset
 
@@ -95,11 +95,17 @@ The configuration file is a json file, which looks like this:
 
 The model section defines the type of the model to construct as well as other parameters of the model such as the input image size and the list of anchors. Two achitectures are supported at the moment: "Tiny Yolo" and "Full Yolo". 
 
-Download pretrained weights of tiny yolo: https://1drv.ms/u/s!ApLdDEW3ut5fa5Z9jibkqUGG-CA
+Download pretrained features of tiny yolo, full yolo, squeezenet, mobilenet, and inceptionV3 at:
 
-Download pretrained weights of full yolo: https://1drv.ms/u/s!ApLdDEW3ut5fbAMIhQAO1A26n2A
+https://1drv.ms/f/s!ApLdDEW3ut5fec2OzK4S4RpT-SU
 
 These weights must be put in the root folder of the repository. They are the pre-trained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained. Attempt to load these weights to the the full model will result in Keras complaining about about size difference.
+
+The link to the pre-trained weights for the whole model of the raccoon detector can be downloaded at:
+
+https://1drv.ms/f/s!ApLdDEW3ut5feoZAEUwmSMYdPlY
+
+These weights can be used as the pre-trained weights for any one class object detectors.
 
 ### 3. Start the training process
 
