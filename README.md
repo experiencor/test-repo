@@ -18,27 +18,22 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 ### Raccon detection
 <a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center"><img src="https://i.imgur.com/6okeDjz.jpg" height="300"></p></a>
 
-Dataset => https://github.com/datitran/raccoon_dataset.
+Dataset => https://github.com/experiencor/raccoon_dataset
 
 ### Kangaroo detection
 <a href="https://youtu.be/vjmFzEP1qZw?t=34" rel="some text"><p align="center"><img src="https://i.imgur.com/v606VZX.jpg" height="300"></p></a>
 
-Dataset to be released.
+Dataset => https://github.com/experiencor/kangaroo
 
 ### Self-driving Car
 <a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/kEc9ptL.jpg" height="300"></p></a>
 
-Trained on COCO dataset and did detection on a random dashcam video.
+Dataset => http://cocodataset.org/#detections-challenge2017
 
 ### Red blod cell detection
 <a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/7zwuGiJ.jpg" height="300"></p></a>
 
-Dataset => https://github.com/cosmicad/dataset.
-
-### Hand detection
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/7zwuGiJ.jpg" height="300"></p></a>
-
-Dataset => confidential.
+Dataset => https://github.com/cosmicad/dataset
 
 ## Usage for python code
 ### 1. Data preparation
@@ -104,13 +99,13 @@ Download pretrained weights of tiny yolo: https://1drv.ms/u/s!ApLdDEW3ut5fa5Z9ji
 
 Download pretrained weights of full yolo: https://1drv.ms/u/s!ApLdDEW3ut5fbAMIhQAO1A26n2A
 
-These weights must be put in the root folder of the repository. They are the pre-trained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained.
+These weights must be put in the root folder of the repository. They are the pre-trained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained. Attempt to load these weights to the the full model will result in Keras complaining about about size difference.
 
 ### 3. Start the training process
 
 `python train.py -c config.json`
 
-By the end of this process, the code will write the weights of the best model to file best_weights.h5. The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
+By the end of this process, the code will write the weights of the best model to file best_weights.h5 (or whatever name specified in the setting "saved_weights_name" in the config.json file). The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
 
 ### 4. Perform detection using trained weights on an image by running
 `python predict.py -c config.json -w /path/to/best_weights.h5 -i /path/to/image`
