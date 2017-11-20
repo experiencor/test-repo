@@ -1,7 +1,9 @@
 
+Easy training on custom dataset. Various backends (MobileNet, SqueezeNet, InceptionV3) supported. A YOLO demo to detect raccoon run entirely in brower is accessible at https://experiencor.github.io/yolo_demo/demo.html.
+
 # YOLOv2 in Keras and Applications
 
-This project aims to implement all the details of YOLOv2 in Keras with Tensorflow backend. It also explores to apply YOLOv2 to some interesting applications. 
+This repo contains the implementation of YOLOv2 in Keras with Tensorflow backend. It supports training YOLOv2 network with various backends such as MobileNet and InceptionV3. Links to demo applications are shown below. Head to https://experiencor.github.io/yolo_demo/demo.html for a Raccoon Detector demo run entirely in brower with DeepLearn.js and MobileNet backend (it somehow breaks in Window).
 
 ## Todo list:
 - [x] Warmup training
@@ -11,6 +13,9 @@ This project aims to implement all the details of YOLOv2 in Keras with Tensorflo
 - [x] SqueezeNet backend
 - [x] MobileNet backend
 - [x] InceptionV3 backend
+- [x] VGG16 backend
+- [x] ResNet50 backend
+- [ ] Multiple-GPU training
 - [ ] Multiscale training
 
 ## Some example applications (click for videos):
@@ -35,14 +40,14 @@ Dataset => http://cocodataset.org/#detections-challenge2017
 
 Dataset => https://github.com/cosmicad/dataset
 
-### Red blod cell detection
+### Hand detection
 <a href="https://www.youtube.com/watch?v=p3-3kN_fIz0" rel="some text"><p align="center"><img src="https://i.imgur.com/75imQQz.jpg" height="300"></p></a>
 
-Dataset => https://github.com/cosmicad/dataset
+Dataset => http://cvrr.ucsd.edu/vivachallenge/index.php/hands/hand-detection/
 
 ## Usage for python code
 ### 1. Data preparation
-Download the Raccoon dataset from from https://github.com/datitran/raccoon_dataset.
+Download the Raccoon dataset from from https://github.com/experiencor/raccoon_dataset.
 
 Organize the dataset into 4 folders:
 
@@ -62,7 +67,7 @@ The configuration file is a json file, which looks like this:
 ```python
 {
     "model" : {
-        "architecture":         "Full Yolo",    # should be either "Tiny Yolo" or "Full Yolo"
+        "architecture":         "Full Yolo",    # "Tiny Yolo" or "Full Yolo" or "MobileNet" or "SqueezeNet" or "Inception3"
         "input_size":           416,
         "anchors":              [0.57273, 0.677385, 1.87446, 2.06253, 3.33843, 5.47434, 7.88282, 3.52778, 9.77052, 9.16828],
         "max_box_per_image":    10,        
@@ -78,7 +83,7 @@ The configuration file is a json file, which looks like this:
         "batch_size":           16,             # the number of images to read in each batch
         "learning_rate":        1e-4,           # the base learning rate of the default Adam rate scheduler
         "nb_epoch":             50,             # number of epoches
-        "warmup_batches":       100,            # the number of initial batches during which the sizes of the 5 boxes in each cell is forced to match the sizes of the 5 anchors, this trick seems to improve precision emperically
+        "warmup_epochs":        3,            # the number of initial batches during which the sizes of the 5 boxes in each cell is forced to match the sizes of the 5 anchors, this trick seems to improve precision emperically
 
         "object_scale":         5.0 ,           # determine how much to penalize wrong prediction of confidence of object predictors
         "no_object_scale":      1.0,            # determine how much to penalize wrong prediction of confidence of non-object predictors
@@ -98,15 +103,15 @@ The configuration file is a json file, which looks like this:
 
 ```
 
-The model section defines the type of the model to construct as well as other parameters of the model such as the input image size and the list of anchors. Two achitectures are supported at the moment: "Tiny Yolo" and "Full Yolo". 
+The model section defines the type of the model to construct as well as other parameters of the model such as the input image size and the list of anchors. 
 
-Download pretrained features of tiny yolo, full yolo, squeezenet, mobilenet, and inceptionV3 at:
+Download pretrained weights for backend (tiny yolo, full yolo, squeezenet, mobilenet, and inceptionV3) at:
 
 https://1drv.ms/f/s!ApLdDEW3ut5fec2OzK4S4RpT-SU
 
-These weights must be put in the root folder of the repository. They are the pretrained weights for all the layers except the last layer and will be loaded during model creation. The last layer has different sizes for different numbers of classes and should be re-trained.
+These weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without these weights.
 
-The link to the pretrained weights for the whole model of the raccoon detector can be downloaded at:
+The link to the pretrained weights for the whole model (both frontend and backend) of the raccoon detector can be downloaded at:
 
 https://1drv.ms/f/s!ApLdDEW3ut5feoZAEUwmSMYdPlY
 
@@ -119,7 +124,7 @@ These weights can be used as the pretrained weights for any one class object det
 By the end of this process, the code will write the weights of the best model to file best_weights.h5 (or whatever name specified in the setting "saved_weights_name" in the config.json file). The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
 
 ### 4. Perform detection using trained weights on an image by running
-`python predict.py -c config.json -w /path/to/best_weights.h5 -i /path/to/image`
+`python predict.py -c config.json -w /path/to/best_weights.h5 -i /path/to/image/or/video`
 
 It carries out detection on the image and write the image with detected bounding boxes to the same folder.
 
