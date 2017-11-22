@@ -113,7 +113,7 @@ Download pretrained weights for backend (tiny yolo, full yolo, squeezenet, mobil
 
 https://1drv.ms/f/s!ApLdDEW3ut5fec2OzK4S4RpT-SU
 
-These weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without these weights.
+**These weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without these weights.**
 
 The link to the pretrained weights for the whole model (both frontend and backend) of the raccoon detector can be downloaded at:
 
@@ -129,9 +129,9 @@ Set ```warmup_epochs``` in config.json to some number to 3 (emperically found, 4
 
 `python train.py -c config.json`
 
-#### Actual training
+#### Actual network training
 
-Set ```warmup_epochs``` in config.json to some number to 0.
+Set ```warmup_epochs``` in config.json to 0.
 
 `python train.py -c config.json`
 
