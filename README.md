@@ -1,9 +1,6 @@
-
-Easy training on custom dataset. Various backends (MobileNet, SqueezeNet, InceptionV3) supported. A YOLO demo to detect raccoon run entirely in brower is accessible at https://experiencor.github.io/yolo_demo/demo.html.
-
 # YOLOv2 in Keras and Applications
 
-This repo contains the implementation of YOLOv2 in Keras with Tensorflow backend. It supports training YOLOv2 network with various backends such as MobileNet and InceptionV3. Links to demo applications are shown below. Head to https://experiencor.github.io/yolo_demo/demo.html for a Raccoon Detector demo run entirely in brower with DeepLearn.js and MobileNet backend (it somehow breaks in Window).
+This repo contains the implementation of YOLOv2 in Keras with Tensorflow backend. It supports training YOLOv2 network with various backends such as MobileNet and InceptionV3. Links to demo applications are shown below. Check out https://experiencor.github.io/yolo_demo/demo.html for a Raccoon Detector demo run entirely in brower with DeepLearn.js and MobileNet backend (it somehow breaks in Window). Source code of this demo is located at https://git.io/vF7vG.
 
 ## Todo list:
 - [x] Warmup training
@@ -46,6 +43,13 @@ Dataset => https://github.com/cosmicad/dataset
 Dataset => http://cvrr.ucsd.edu/vivachallenge/index.php/hands/hand-detection/
 
 ## Usage for python code
+### 0. Requirements
+
+```
+pip install 'keras==2.0.8' (version 2.0.8 is required for multiple-class detection)
+
+```
+
 ### 1. Data preparation
 Download the Raccoon dataset from from https://github.com/experiencor/raccoon_dataset.
 
@@ -83,7 +87,7 @@ The configuration file is a json file, which looks like this:
         "batch_size":           16,             # the number of images to read in each batch
         "learning_rate":        1e-4,           # the base learning rate of the default Adam rate scheduler
         "nb_epoch":             50,             # number of epoches
-        "warmup_epochs":        3,            # the number of initial batches during which the sizes of the 5 boxes in each cell is forced to match the sizes of the 5 anchors, this trick seems to improve precision emperically
+        "warmup_epochs":        3,              # the number of initial epochs during which the sizes of the 5 boxes in each cell is forced to match the sizes of the 5 anchors, this trick seems to improve precision emperically
 
         "object_scale":         5.0 ,           # determine how much to penalize wrong prediction of confidence of object predictors
         "no_object_scale":      1.0,            # determine how much to penalize wrong prediction of confidence of non-object predictors
@@ -118,6 +122,16 @@ https://1drv.ms/f/s!ApLdDEW3ut5feoZAEUwmSMYdPlY
 These weights can be used as the pretrained weights for any one class object detectors.
 
 ### 3. Start the training process
+
+#### Warm up the network
+
+Set ```warmup_epochs``` in config.json to some number to 3 (emperically found, 4 or 5 is also fine).
+
+`python train.py -c config.json`
+
+#### Actual training
+
+Set ```warmup_epochs``` in config.json to some number to 0.
 
 `python train.py -c config.json`
 
