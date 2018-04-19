@@ -1,56 +1,31 @@
-# YOLOv2 in Keras and Applications
+# YOLO3 (Detection, Training, and Evaluation)
 
-This repo contains the implementation of YOLOv2 in Keras with Tensorflow backend. It supports training YOLOv2 network with various backends such as MobileNet and InceptionV3. Links to demo applications are shown below. Check out https://experiencor.github.io/yolo_demo/demo.html for a Raccoon Detector demo run entirely in brower with DeepLearn.js and MobileNet backend (it somehow breaks in Window). Source code of this demo is located at https://git.io/vF7vG.
+## Dataset and Model
+
+Dataset | mAP | Config | Model | Demo
+:---:|:---:|:---:|:---:|:---:
+Kangaroo Detection (https://github.com/experiencor/kangaroo) | 95% | check zoo | check zoo | https://youtu.be/URO3UDHvoLY
+Raccoon Detection (https://github.com/experiencor/raccoon_dataset) | 98% | check zoo | check zoo | https://youtu.be/lxLyLIL7OsU
+Red Blood Cell Detection (https://github.com/experiencor/BCCD_Dataset) | 84% | check zoo | check zoo | https://imgur.com/a/uJl2lRI
 
 ## Todo list:
-- [x] Warmup training
-- [x] Raccoon detection
-- [x] Self-driving car
-- [x] Kangaroo detection
-- [x] SqueezeNet backend
-- [x] MobileNet backend
-- [x] InceptionV3 backend
-- [x] VGG16 backend
-- [x] ResNet50 backend
-- [ ] Multiple-GPU training
-- [ ] Multiscale training
+- [x] Yolo3 detection
+- [x] Yolo3 training (warmup and multi-scale)
+- [x] Evaluation
+- [x] Multi-GPU training
+- [ ] Evaluation on COCO
+- [ ] MobileNet, DenseNet, ResNet, and VGG backends
 
-## Some example applications (click for videos):
+## Detection
 
-### Raccon detection
-<a href="https://www.youtube.com/watch?v=aibuvj2-zxA" rel="some text"><p align="center"><img src="https://i.imgur.com/6okeDjz.jpg" height="300"></p></a>
+Grab the pretrained weights of yolo3 from https://pjreddie.com/media/files/yolov3.weights.
 
-Dataset => https://github.com/experiencor/raccoon_dataset
+```python yolo3_one_file_to_detect_them_all.py -w yolo3.weights -i dog.jpg``` 
 
-### Kangaroo detection
-<a href="https://youtu.be/vjmFzEP1qZw?t=34" rel="some text"><p align="center"><img src="https://i.imgur.com/v606VZX.jpg" height="300"></p></a>
+## Training
 
-Dataset => https://github.com/experiencor/kangaroo
+### 1. Data preparation 
 
-### Self-driving Car
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/kEc9ptL.jpg" height="300"></p></a>
-
-Dataset => http://cocodataset.org/#detections-challenge2017
-
-### Red blod cell detection
-<a href="https://www.youtube.com/watch?v=oYCaILZxEWM" rel="some text"><p align="center"><img src="https://i.imgur.com/1vmIJKL.jpg" height="300"></p></a>
-
-Dataset => https://github.com/cosmicad/dataset
-
-### Hand detection
-<a href="https://www.youtube.com/watch?v=p3-3kN_fIz0" rel="some text"><p align="center"><img src="https://i.imgur.com/75imQQz.jpg" height="300"></p></a>
-
-Dataset => http://cvrr.ucsd.edu/vivachallenge/index.php/hands/hand-detection/
-
-## Usage for python code
-### 0. Requirements
-
-```
-pip install 'keras==2.0.8' (version 2.0.8 is required for multiple-class detection)
-
-```
-
-### 1. Data preparation
 Download the Raccoon dataset from from https://github.com/experiencor/raccoon_dataset.
 
 Organize the dataset into 4 folders:
@@ -71,9 +46,9 @@ The configuration file is a json file, which looks like this:
 ```python
 {
     "model" : {
-        "architecture":         "Full Yolo",    # "Tiny Yolo" or "Full Yolo" or "MobileNet" or "SqueezeNet" or "Inception3"
-        "input_size":           416,
-        "anchors":              [0.57273, 0.677385, 1.87446, 2.06253, 3.33843, 5.47434, 7.88282, 3.52778, 9.77052, 9.16828],
+        "min_input_size":       352,
+        "max_input_size":       448,
+        "anchors":              [10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326],
         "max_box_per_image":    10,        
         "labels":               ["raccoon"]
     },
@@ -88,12 +63,10 @@ The configuration file is a json file, which looks like this:
         "learning_rate":        1e-4,           # the base learning rate of the default Adam rate scheduler
         "nb_epoch":             50,             # number of epoches
         "warmup_epochs":        3,              # the number of initial epochs during which the sizes of the 5 boxes in each cell is forced to match the sizes of the 5 anchors, this trick seems to improve precision emperically
+        "ignore_thresh":        0.5,
+        "gpus":                 "0,1",
 
-        "object_scale":         5.0 ,           # determine how much to penalize wrong prediction of confidence of object predictors
-        "no_object_scale":      1.0,            # determine how much to penalize wrong prediction of confidence of non-object predictors
-        "coord_scale":          1.0,            # determine how much to penalize wrong position and size predictions (x, y, w, h)
-        "class_scale":          1.0,            # determine how much to penalize wrong class prediction
-
+        "saved_weights_name":   "raccoon.h5",
         "debug":                true            # turn on/off the line that prints current confidence, position, size, class losses and recall
     },
 
@@ -107,47 +80,33 @@ The configuration file is a json file, which looks like this:
 
 ```
 
-The model section defines the type of the model to construct as well as other parameters of the model such as the input image size and the list of anchors. The ```labels``` setting lists the labels to be trained on. Only images, which has labels being listed, are fed to the network. The rest images are simply ignored. By this way, a Dog Detector can easily be trained using VOC or COCO dataset by setting ```labels``` to ```['dog']```.
+The ```labels``` setting lists the labels to be trained on. Only images, which has labels being listed, are fed to the network. The rest images are simply ignored. By this way, a Dog Detector can easily be trained using VOC or COCO dataset by setting ```labels``` to ```['dog']```.
 
-Download pretrained weights for backend (tiny yolo, full yolo, squeezenet, mobilenet, and inceptionV3) at:
+Download pretrained weights for backend at:
 
-https://1drv.ms/f/s!ApLdDEW3ut5fec2OzK4S4RpT-SU
+https://1drv.ms/u/s!ApLdDEW3ut5fgQXa7GzSlG-mdza6
 
-**These weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without these weights.**
+**This weights must be put in the root folder of the repository. They are the pretrained weights for the backend only and will be loaded during model creation. The code does not work without this weights.**
 
-The link to the pretrained weights for the whole model (both frontend and backend) of the raccoon detector can be downloaded at:
+### 3. Generate anchors for your dataset (optional)
 
-https://1drv.ms/f/s!ApLdDEW3ut5feoZAEUwmSMYdPlY
+`python gen_anchors.py -c config.json`
 
-These weights can be used as the pretrained weights for any one class object detectors.
+Copy the generated anchors printed on the terminal to the ```anchors``` setting in ```config.json```.
 
-### 3. Start the training process
-
-#### Warm up the network
-
-Set ```warmup_epochs``` in config.json to some number to 3 (emperically found, 4 or 5 is also fine).
-
-`python train.py -c config.json`
-
-#### Actual network training
-
-Set ```warmup_epochs``` in config.json to 0.
+### 4. Start the training process
 
 `python train.py -c config.json`
 
 By the end of this process, the code will write the weights of the best model to file best_weights.h5 (or whatever name specified in the setting "saved_weights_name" in the config.json file). The training process stops when the loss on the validation set is not improved in 3 consecutive epoches.
 
-### 4. Perform detection using trained weights on an image by running
-`python predict.py -c config.json -w /path/to/best_weights.h5 -i /path/to/image/or/video`
+### 5. Perform detection using trained weights on an image by running
+`python predict.py -c config.json -i /path/to/image/or/video`
 
 It carries out detection on the image and write the image with detected bounding boxes to the same folder.
 
-## Usage for jupyter notebook
+## Evaluation
 
-Refer to the notebook (https://github.com/experiencor/basic-yolo-keras/blob/master/Yolo%20Step-by-Step.ipynb) for a complete walk-through implementation of YOLOv2 from scratch (training, testing, and scoring).
+`python evaluate.py -c config.json`
 
-## Evaluation of the current implementation:
-
-| Train        | Test          | mAP (with this implementation) | mAP (on released weights) |
-| -------------|:--------------|:------------------------:|:-------------------------:|
-| COCO train   | COCO val      | 28.6 |    42.1 |
+Compute the mAP performance of the model defined in `saved_weights_name` on the validation dataset defined in `valid_image_folder` and `valid_annot_folder`.
